@@ -42,20 +42,6 @@ export function login(loginRequest) {
     });
 }
 
-export function getAlbuns() {
-    return request({
-        url: API_BASE_URL + "/facebook/albums",
-        method: 'GET'
-    });
-}
-
-export function getMoreAlbuns(albumId,navegationId,direction) {
-    return request({
-        url: API_BASE_URL + "/facebook/albums/" + albumId + "?"+ direction +"=" + navegationId,
-        method: 'GET'
-    });
-}
-
 export function signup(signupRequest) {
     return request({
         url: API_BASE_URL + "/auth/signup",
@@ -64,9 +50,31 @@ export function signup(signupRequest) {
     });
 }
 
-export function getPhotos(photosId) {
+export function getAlbuns() {
     return request({
-        url: API_BASE_URL + "/facebook/album/" + photosId + "/photos",
+        url: API_BASE_URL + "/facebook/albums",
         method: 'GET'
     });
 }
+
+export function getMoreAlbuns(facebookId, navegationId, direction) {
+    return request({
+        url: API_BASE_URL + "/facebook/albums/" + facebookId + "?" + direction + "=" + navegationId,
+        method: 'GET'
+    });
+}
+
+export function getPhotos(albumId) {
+    return request({
+        url: API_BASE_URL + "/facebook/album/" + albumId + "/photos",
+        method: 'GET'
+    });
+}
+
+export function getMorePhotos(albumId, navegationId, direction) {
+    return request({
+        url: API_BASE_URL + "/facebook/album/" + albumId + "/photos?" + direction + "=" + navegationId,
+        method: 'GET'
+    });
+}
+
