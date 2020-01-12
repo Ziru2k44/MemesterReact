@@ -66,7 +66,7 @@ export function signup(signupRequest) {
 
 export function getPhotos(photosId) {
     return request({
-        url: API_BASE_URL + "/facebook/album/" + photosId + "/photos/",
+        url: API_BASE_URL + "/facebook/album/" + photosId + "/photos",
         method: 'GET'
     });
 }
