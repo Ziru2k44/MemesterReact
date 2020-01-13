@@ -170,7 +170,16 @@ class Albuns extends Component {
           <ul>{this.state.listItems}</ul>
         }
         </div>
-       
+        <div className="Buttons-space">
+        { this.state.previousEmpty!==null  &&<button type="button" onClick={() => this.previouslist()}>
+            Previous
+          </button>}
+          
+          { this.state.nextItems!==this.state.previousItems && <button type="button" onClick={() => this.nextlist()}>
+            Next
+          </button> }
+          
+        </div>
       </div>
     );
   }
