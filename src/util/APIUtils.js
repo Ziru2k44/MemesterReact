@@ -71,9 +71,9 @@ export function getPhotos(albumId) {
     });
 }
 
-export function getMorePhotos(albumId, navegationId, direction) {
+export function getMorePhotos(albumId, direction) {
     return request({
-        url: API_BASE_URL + "/facebook/album/" + albumId + "/photos?" + direction + "=" + navegationId,
+        url: API_BASE_URL + "/facebook/album/" + albumId + "/photos?" + direction,
         method: 'GET'
     });
 }

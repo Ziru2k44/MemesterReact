@@ -1,24 +1,30 @@
 import React, { Component } from "react";
 import "./Photos.css";
 
-import { getPhotos} from "../../../util/APIUtils";
+import { getPhotos, getMorePhotos} from "../../../util/APIUtils";
 
 
 class Photos extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        urlphotos: null
+        urlphotos: null,
+        albumId:null,
+        nextItems: null,
+        previousItems: null,
+        previousEmpty:null,
       };
   }
 
   componentDidMount() {
-    this.setState({loading:true,});
    getPhotos(this.props.match.params.id)
 
       .then(response => {
         console.log(response);
         this.setState({
+            albumId:this.props.match.params.id,
+            nextItems: response.paging.cursors.after,
+            previousItems: null,
             urlphotos: response.data.map(photo => (
                 <li className="col-3 float-left" key={photo.id}>
                   
@@ -33,6 +39,56 @@ class Photos extends Component {
       .catch(error => {});
   }
 
+  nextlist() {
+
+   console.log(this.state.albumId); 
+   getMorePhotos(this.state.albumId,"after")
+   
+    .then(response => {
+      console.log(response);
+      this.setState({
+        previousEmpty: response.paging.previous,
+        nextItems: response.paging.cursors.after,
+        previousItems : response.paging.cursors.before,
+        urlphotos: response.data.map(photo => (
+          
+          <li className="col-3 float-left" key={photo.id}>
+                  
+                    <img src={photo.webp_images[0].source} aria-hidden alt={"facebook picture"} style={{"width": "100%","height": "auto","paddingRight":"5px"}}/>
+                    
+                  
+                </li>
+        
+        ))
+      });
+    })
+    .catch(error => {});
+    console.log(this.state.previousItems); 
+  }
+
+  previouslist() {
+   getMorePhotos(this.state.albumId,"before")
+    .then(response => {
+      console.log(response);
+      this.setState({
+        previousEmpty: response.paging.previous,
+        nextItems: response.paging.cursors.after,
+        previousItems : response.paging.cursors.before,
+        urlphotos: response.data.map(photo => (
+          
+          <li className="col-3 float-left" key={photo.id}>
+                  
+          <img src={photo.webp_images[0].source} aria-hidden alt={"facebook picture"} style={{"width": "100%","height": "auto","paddingRight":"5px"}}/>
+          
+        
+      </li>
+        
+        ))
+      });
+    })
+    .catch(error => {});
+    console.log(this.state);
+  }
 
   render() {
     return (
