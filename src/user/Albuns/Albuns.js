@@ -30,6 +30,7 @@ class Albuns extends Component {
         this.setState({
           loading:false,
           idItems: response.id,
+          previousItems : response.albums.paging.cursors.before,
           nextItems: response.albums.paging.cursors.after,
           listItems: response.albums.data.map(album => (
             <li className="col-3 float-left" key={album.id}>

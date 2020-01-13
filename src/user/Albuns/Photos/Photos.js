@@ -13,6 +13,7 @@ class Photos extends Component {
         nextItems: null,
         previousItems: null,
         previousEmpty:null,
+        nextEmpty:null,
       };
   }
 
@@ -25,6 +26,7 @@ class Photos extends Component {
             albumId:this.props.match.params.id,
             nextItems: response.paging.cursors.after,
             previousItems: null,
+            nextEmpty:response.paging.next,
             urlphotos: response.data.map(photo => (
                 <li className="col-3 float-left" key={photo.id}>
                   
@@ -42,12 +44,13 @@ class Photos extends Component {
   nextlist() {
 
    console.log(this.state.albumId); 
-   getMorePhotos(this.state.albumId,"after")
+   getMorePhotos(this.state.albumId,this.state.nextItems,"after")
    
     .then(response => {
       console.log(response);
       this.setState({
         previousEmpty: response.paging.previous,
+        nextEmpty:response.paging.next,
         nextItems: response.paging.cursors.after,
         previousItems : response.paging.cursors.before,
         urlphotos: response.data.map(photo => (
@@ -67,11 +70,12 @@ class Photos extends Component {
   }
 
   previouslist() {
-   getMorePhotos(this.state.albumId,"before")
+   getMorePhotos(this.state.albumId,this.state.previousItems,"before")
     .then(response => {
       console.log(response);
       this.setState({
         previousEmpty: response.paging.previous,
+        nextEmpty:response.paging.next,
         nextItems: response.paging.cursors.after,
         previousItems : response.paging.cursors.before,
         urlphotos: response.data.map(photo => (
@@ -107,7 +111,7 @@ class Photos extends Component {
             Previous
           </button>}
           
-          { this.state.previousItems!==this.state.nextItems && <button type="button" onClick={() => this.nextlist()}>
+          { this.state.nextEmpty!==null && <button type="button" onClick={() => this.nextlist()}>
             Next
           </button> }
           
