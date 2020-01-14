@@ -30,7 +30,7 @@ class Photos extends Component {
             urlphotos: response.data.map(photo => (
                 <li className="col-3 float-left" key={photo.id}>
                   
-                    <img src={photo.webp_images[0].source} aria-hidden alt={"facebook picture"} style={{"width": "100%","height": "auto","paddingRight":"5px"}}/>
+                    <img src={photo.webp_images[0].source} aria-hidden alt={"facebook picture"} style={{"width": "auto","max-width":"100%","height": "auto","paddingRight":"5px"}}/>
                     
                   
                 </li>
@@ -57,7 +57,7 @@ class Photos extends Component {
           
           <li className="col-3 float-left" key={photo.id}>
                   
-                    <img src={photo.webp_images[0].source} aria-hidden alt={"facebook picture"} style={{"width": "100%","height": "auto","paddingRight":"5px"}}/>
+                    <img src={photo.webp_images[0].source} aria-hidden alt={"facebook picture"} style={{"width": "auto","max-width":"100%","height": "auto","paddingRight":"5px"}}/>
                     
                   
                 </li>
@@ -82,7 +82,7 @@ class Photos extends Component {
           
           <li className="col-3 float-left" key={photo.id}>
                   
-          <img src={photo.webp_images[0].source} aria-hidden alt={"facebook picture"} style={{"width": "100%","height": "auto","paddingRight":"5px"}}/>
+          <img src={photo.webp_images[0].source} aria-hidden alt={"facebook picture"} style={{"width": "auto","max-width":"100%","height": "auto","paddingRight":"5px"}}/>
           
         
       </li>
