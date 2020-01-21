@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import "./Photos.css";
-
 import { getPhotos, getMorePhotos} from "../../../util/APIUtils";
-
 
 class Photos extends Component {
   constructor(props) {
@@ -17,6 +15,7 @@ class Photos extends Component {
       };
   }
 
+
   componentDidMount() {
    getPhotos(this.props.match.params.id)
 
@@ -26,12 +25,12 @@ class Photos extends Component {
             albumId:this.props.match.params.id,
             nextItems: response.paging.cursors.after,
             previousItems: null,
-            nextEmpty:response.paging.next,
+            nextEmpty:response.paging.next, 
             urlphotos: response.data.map(photo => (
                 <li className="col-3 float-left" key={photo.id}>
-                  
+                  <a href="#" >
                     <img src={photo.webp_images[0].source} aria-hidden alt={"facebook picture"} style={{"width": "auto","maxWidth":"100%","height": "auto","paddingRight":"5px"}}/>
-                    
+                  </a>
                   
                 </li>
               ))
@@ -56,9 +55,9 @@ class Photos extends Component {
         urlphotos: response.data.map(photo => (
           
           <li className="col-3 float-left" key={photo.id}>
-                  
+                  <a href="#">
                     <img src={photo.webp_images[0].source} aria-hidden alt={"facebook picture"} style={{"width": "auto","maxWidth":"100%","height": "auto","paddingRight":"5px"}}/>
-                    
+                    </a>
                   
                 </li>
         
@@ -81,9 +80,9 @@ class Photos extends Component {
         urlphotos: response.data.map(photo => (
           
           <li className="col-3 float-left" key={photo.id}>
-                  
+            <a href="#">    
           <img src={photo.webp_images[0].source} aria-hidden alt={"facebook picture"} style={{"width": "auto","maxWidth":"100%","height": "auto","paddingRight":"5px"}}/>
-          
+          </a>   
         
       </li>
         
@@ -103,7 +102,6 @@ class Photos extends Component {
           <h4 style={{ textAlign: "center" }}>Photos</h4>
           
           <ul>{this.state.urlphotos}</ul>
-       
           
         </div>
         <div className="Buttons-space">
