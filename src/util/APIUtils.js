@@ -34,11 +34,11 @@ export function getCurrentUser() {
     });
 }
 
-export function login(loginRequest) {
+export function SubmiteMeme(SubmitedInfo) {
     return request({
-        url: API_BASE_URL + "/auth/login",
+        url: API_BASE_URL + "/meme/",
         method: 'POST',
-        body: JSON.stringify(loginRequest)
+        body: JSON.stringify(SubmitedInfo)
     });
 }
 

@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import "./Photos.css";
 import { getPhotos, getMorePhotos} from "../../../util/APIUtils";
 
+
+import Modal from './Modals/Modal';
 class Photos extends Component {
   constructor(props) {
     super(props);
@@ -12,7 +14,11 @@ class Photos extends Component {
         previousItems: null,
         previousEmpty:null,
         nextEmpty:null,
+        modalOpen:"false",
+        modalPicture:"none",
       };
+
+      
   }
 
 
@@ -28,11 +34,12 @@ class Photos extends Component {
             nextEmpty:response.paging.next, 
             urlphotos: response.data.map(photo => (
                 <li className="col-3 float-left" key={photo.id}>
-                  <a href="#" >
-                    <img src={photo.webp_images[0].source} aria-hidden alt={"facebook picture"} style={{"width": "auto","maxWidth":"100%","height": "auto","paddingRight":"5px"}}/>
+                  <a href="#" onClick={() => this.setState({modalOpen:"true",modalPicture:photo.webp_images[0].source,})}>
+                    <img src={photo.webp_images[3].source} aria-hidden alt={"facebook picture"} style={{"width": "250px","height": "250px","objectFit": "none","paddingRight":"5px"}}/>
                   </a>
                   
-                </li>
+
+                  </li>
               ))
         })
         
@@ -59,6 +66,7 @@ class Photos extends Component {
                     <img src={photo.webp_images[0].source} aria-hidden alt={"facebook picture"} style={{"width": "auto","maxWidth":"100%","height": "auto","paddingRight":"5px"}}/>
                     </a>
                   
+                    
                 </li>
         
         ))
@@ -94,9 +102,13 @@ class Photos extends Component {
   }
 
   render() {
-    return (
 
+    return (
+      
         <div className="profile-container">
+
+      <Modal modalOpen={this.state.modalOpen} urlPicture={this.state.modalPicture} />
+
         <div className="container">
           
           <h4 style={{ textAlign: "center" }}>Photos</h4>
@@ -113,12 +125,14 @@ class Photos extends Component {
             Next
           </button> }
           
+
+          
+
         </div>
       </div>
 
 
-       
-
+  
     );
   }
 }
